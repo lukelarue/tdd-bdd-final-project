@@ -167,6 +167,14 @@ class TestProductRoutes(TestCase):
     # ADD YOUR TEST CASES HERE
     #
 
+    def test_read_product(self):
+        test_product = _create_products(1)[0]
+        url = BASE_URL + test_product.id
+        response = self.client.get(f"{BASE_URL}/{test_product_id}")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.get_json()
+        self.assertEqual(data["name"], test_product.name)
+
     ######################################################################
     # Utility functions
     ######################################################################
